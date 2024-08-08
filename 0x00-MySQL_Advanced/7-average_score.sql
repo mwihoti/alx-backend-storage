@@ -2,7 +2,7 @@
 
 DROP PROCEDURE IF EXISTS ComputeAverageScoreForUser;
 DELIMITER $$
-CREATE PROCEDURE ComputerAverageScoreForUser(user_id INT)
+CREATE PROCEDURE ComputeAverageScoreForUser(user_id INT)
 BEGIN
     DECLARE total_score FLOAT DEFAULT 0;
     DECLARE project_count INT DEFAULT 0;
@@ -17,7 +17,7 @@ BEGIN
         WHERE corrections.user_id = user_id;
     
     UPDATE users
-        SET users. average_score = IF(projects_count = 0, 0, total_score / project_count)
+        SET users. average_score = IF(project_count = 0, 0, total_score / project_count)
         WHERE users.id = user_id;
 END $$
 DELIMITER ;
