@@ -2,7 +2,7 @@ MySQL Advanced
 This project contains tasks for learning advanced MySQL features.
 
 Tasks To Complete
-> 0. We are all unique!
+0. We are all unique!
 0-uniq_users.sql contains a SQL script that creates a table users following these requirements:
 
 With these attributes:
@@ -12,7 +12,7 @@ name, string (255 characters).
 If the table already exists, your script should not fail.
 Your script can be executed on any database.
 Context: Make an attribute unique directly in the table schema will enforced your business rules and avoid bugs in your application
-> 1. In and not out
+1. In and not out
 1-country_users.sql contains a SQL script that creates a table users following these requirements:
 
 With these attributes:
@@ -22,21 +22,22 @@ name, string (255 characters).
 country, enumeration of countries: US, CO and TN, never null (default value will be the first element of the enumeration, which is US).
 If the table already exists, your script should not fail.
 Your script can be executed on any database.
-> 2. Best band ever!
+2. Best band ever!
 2-fans.sql contains a SQL script that ranks country origins of bands, ordered by the number of (non-unique) fans.
 
 Import this table dump: metal_bands.sql.
 Column names must be: origin and nb_fans.
 Your script can be executed on any database.
 Context: Context: Calculating/computing something is always power intensive… better to distribute the load!
-> 3. Old school band
+
+3. Old school band
 3-metal_bands.sql contains a SQL script that lists all bands with Glam rock as their main style, ranked by their longevity:
 
 Import this table dump: metal_bands.sql.
 Column names must be: band_name and lifespan (in years).
 You should use attributes formed and split for computing the lifespan.
 Your script can be executed on any database.
-> 4. Buy buy buy
+4. Buy buy buy
 4-store.sql contains a SQL script that creates a trigger that decreases the quantity of an item after adding a new order:
 
 Quantity in the table items can be negative.
@@ -76,7 +77,7 @@ INSERT INTO users (email, name) VALUES ("bob@dylan.com", "Bob");
 INSERT INTO users (email, name, valid_email) VALUES ("sylvie@dylan.com", "Sylvie", 1);
 INSERT INTO users (email, name, valid_email) VALUES ("jeanne@dylan.com", "Jeanne", 1);
 Context: Nothing related to MySQL, but perfect for user email validation - distribute the logic to the database itself!
-> 6. Add bonus
+6. Add bonus
 6-bonus.sql contains a SQL script that creates a stored procedure AddBonus that adds a new correction for a student:
 
 The procedure AddBonus takes 3 inputs (in this order):
@@ -130,7 +131,7 @@ INSERT INTO corrections (user_id, project_id, score) VALUES (@user_bob, @project
 
 INSERT INTO corrections (user_id, project_id, score) VALUES (@user_jeanne, @project_c, 91);
 INSERT INTO corrections (user_id, project_id, score) VALUES (@user_jeanne, @project_py, 73);
-> 7. Average score
+7. Average score
 7-average_score.sql contains a SQL script that creates a stored procedure ComputeAverageScoreForUser that computes and store the average score for a student.
 
 Note: An average score can be a decimal.
@@ -183,17 +184,17 @@ INSERT INTO corrections (user_id, project_id, score) VALUES (@user_bob, @project
 
 INSERT INTO corrections (user_id, project_id, score) VALUES (@user_jeanne, @project_c, 91);
 INSERT INTO corrections (user_id, project_id, score) VALUES (@user_jeanne, @project_py, 73);
-> 8. Optimize simple search
+> ptimize simple search
 8-index_my_names.sql contains a SQL script that creates an index idx_name_first on the table names and the first letter of name:
 
 Import this archived table dump: names.7z.
 Only the first letter of name must be indexed.
-> 9. Optimize search and score
+9. Optimize search and score
 9-index_name_score.sql contains a SQL script that creates an index idx_name_first_score on the table names and the first letter of name and the score:
 
 Import this archived table dump: names.7z.
 Only the first letter of name AND score must be indexed.
-> 10. Safe divide
+10. Safe divide
 10-div.sql contains a SQL script that creates a function SafeDiv that divides (and returns) the first by the second number or returns 0 if the second number is equal to 0:
 
 The function SafeDiv takes 2 arguments:
