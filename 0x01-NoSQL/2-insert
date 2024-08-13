@@ -3,5 +3,5 @@
 // databse name will be passed as option of MongoDB
 
 db.school.insert({
-    name: "Holberton"
-})
+    name: "Holberton school"
+});
