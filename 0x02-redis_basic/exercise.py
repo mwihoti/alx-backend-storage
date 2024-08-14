@@ -33,6 +33,35 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
+def replay(method: Callable) -> None:
+    """
+    Function to display the history of calls of a particular function.
+    """
+    # Get the qualified name of the method
+    method_name = method.__qualname__
+
+    # Create the keys for inputs and outputs
+    input_key = f"{method_name}:inputs"
+    output_key = f"{method_name}:outputs"
+
+    # Retrieve the call count
+    redis_instance = method.__self__._redis
+    call_count = redis_instance.get(method_name).decode('utf-8')
+
+    # Retrieve inputs and outputs from Redis
+    inputs = redis_instance.lrange(input_key, 0, -1)
+    outputs = redis_instance.lrange(output_key, 0, -1)
+
+    # Display the call count
+    print(f"{method_name} was called {call_count} times:")
+
+    # Display each call's input and output
+    for input_val, output_val in zip(inputs, outputs):
+        input_str = input_val.decode('utf-8')
+        output_str = output_val.decode('utf-8')
+        print(f"{method_name}(*{input_str}) -> {output_str}")
+
+
 def count_calls(method: Callable) -> Callable:
     """
     Decorator to count how many times a method is called.
