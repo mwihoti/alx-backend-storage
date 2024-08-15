@@ -1,4 +1,16 @@
 #!/usr/bin/env python3
+"""
+This module implements a Cache class that uses Redis for storing data
+and tracking method call histories. It includes decorators for counting
+method calls and storing input/output histories, along with a replay
+function to display the history of method calls.
+
+Functions:
+- count_calls: Decorator to count the number of times a method is called.
+- call_history: Decorator to store input/output history for a method.
+- replay: Function to display the history of method calls.
+"""
+
 
 import redis
 import uuid
