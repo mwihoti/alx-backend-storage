@@ -28,26 +28,26 @@ Redis instance
 
 
 def cache(method: Callable) -> Callable:
-    '''Caches the output of fetched data.
-    '''
+    """
+    caches the output of the fetched data types
+    """
     @wraps(method)
-    def invoker(url) -> str:
-        '''The wrapper function for caching the output.
-        '''
+    def wrapper(url) -> str:
+        """
+        Wrapper function for  caching the output.
+        """
         redis_store.incr(f'count:{url}')
-        result_cache = redis_store.get(f'result:{url}')
-        if result_cache:
-            return result_cache.decode('utf-8')
+        result = redis_store.get(f'result:{url}')
+        if result:
+            return result.decode('utf-8')
         result = method(url)
+        redis_store.set(f'count:{url}', 0)
         redis_store.setex(f'result:{url}', 10, result)
         return result
-    
-    return invoker
+    return wrapper
 
 
 @cache
 def get_page(url: str) -> str:
-    '''Returns the content of a URL after caching the request's response,
-    and tracking the request.
-    '''
+    """ Return the HTML content of a URL """
     return requests.get(url).text
