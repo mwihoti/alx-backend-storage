@@ -1,25 +1,21 @@
-from web import get_page, redis_store  # Importing from the same folder
+#!/usr/bin/env python3
+
+from web import get_page
 
 def main():
-    """Main function to test get_page."""
-    url = "http://slowwly.robertomurray.co.uk/delay/2000/url/http://www.example.com"
+    url = "https://mwihoti-portfolio.vercel.app/"
     
-    print("First access (should fetch from the web):")
+    # First access (should fetch from the web and cache it)
     print(get_page(url))
     
-    print("\nSecond access (should fetch from cache):")
+    # Second access (should fetch from the cache)
     print(get_page(url))
     
-    # Wait for the cache to expire
-    print("\nWaiting for cache to expire...")
-    time.sleep(10)
+    # Sleep for 10 seconds to let the cache expire (use time.sleep(10) if needed)
+    # time.sleep(10)
     
-    print("\nThird access (should fetch from the web again):")
+    # Third access (should fetch from the web again)
     print(get_page(url))
-    
-    # Display the access count
-    count = redis_store.get(f"count:{url}")
-    print(f"\nURL was accessed {int(count)} times.")
 
 if __name__ == "__main__":
     main()
