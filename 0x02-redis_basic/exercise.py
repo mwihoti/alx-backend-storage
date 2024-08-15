@@ -36,6 +36,8 @@ def call_history(method: Callable) -> Callable:
 def replay(method: Callable) -> None:
     """
     Function to display the history of calls of a particular function.
+    Args:
+        fn (callable): function whose history of calls is to be displayed
     """
     # Get the qualified name of the method
     method_name = method.__qualname__
