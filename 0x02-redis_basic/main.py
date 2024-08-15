@@ -1,19 +1,25 @@
-#!/usr/bin/env python3
-""" Main file """
+from web import get_page, redis_store  # Importing from the same folder
 
-Cache = __import__('exercise').Cache
+def main():
+    """Main function to test get_page."""
+    url = "http://slowwly.robertomurray.co.uk/delay/2000/url/http://www.example.com"
+    
+    print("First access (should fetch from the web):")
+    print(get_page(url))
+    
+    print("\nSecond access (should fetch from cache):")
+    print(get_page(url))
+    
+    # Wait for the cache to expire
+    print("\nWaiting for cache to expire...")
+    time.sleep(10)
+    
+    print("\nThird access (should fetch from the web again):")
+    print(get_page(url))
+    
+    # Display the access count
+    count = redis_store.get(f"count:{url}")
+    print(f"\nURL was accessed {int(count)} times.")
 
-cache = Cache()
-
-s1 = cache.store("first")
-print(s1)
-s2 = cache.store("secont")
-print(s2)
-s3 = cache.store("third")
-print(s3)
-
-inputs = cache._redis.lrange("{}:inputs".format(cache.store.__qualname__), 0, -1)
-outputs = cache._redis.lrange("{}:outputs".format(cache.store.__qualname__), 0, -1)
-
-print("inputs: {}".format(inputs))
-print("outputs: {}".format(outputs))
+if __name__ == "__main__":
+    main()
